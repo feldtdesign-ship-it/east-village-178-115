@@ -4,7 +4,8 @@ Two East Village storefronts 307 m apart, one on First Avenue at 11th Street, on
 
 **Live page:** https://feldtdesign-ship-it.github.io/east-village-178-115/
 
-- `index.html` – the pair. One hour-scrubber drives the page: the L at 1st Avenue as the shared pump, a card per door, the block map drawn from OpenStreetMap geometry, the day, the week, the years since 2020, weather, the city's counts, both sidewalks, and what is left to buy.
+- `index.html` – the dossier: scroll-driven camera through the block model, the walk between the doors, the L.
+- `numbers.html` – the pair by the numbers. One hour-scrubber drives the page: the L at 1st Avenue as the shared pump, a card per door, the block map drawn from OpenStreetMap geometry, the day, the week, the years since 2020, weather, the city's counts, both sidewalks, and what is left to buy.
 - `live-wall.html` – the six nearest NYC DOT cameras. Two look down First Avenue from 14th Street.
 - `data/` – the raw pulls: MTA subway hourly ridership for 1st Av (complex 119) and Astor Pl (407), MTA bus stop-level ridership for the ten stops nearest the doors, Open-Meteo weather, curb geometry, the block map.
 - `frames/` – camera frames from the evening of 9 September 2026.

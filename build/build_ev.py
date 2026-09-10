@@ -65,5 +65,5 @@ data = {'l_hourly': l_hourly, 'bus_a': bus['a'], 'bus_b': bus['b'], 'bus_month_a
 svg = open(os.path.join(S, 'map.svg')).read()
 out = open(os.path.join(S, 'ev_template.html')).read().replace('__MAP__', svg).replace('__DATA__', json.dumps(data, separators=(',', ':')))
 open(os.path.join(S, 'index.html'), 'w').write(out)
-if os.path.isdir(R): open(os.path.join(R, 'index.html'), 'w').write(out)
+if os.path.isdir(R): open(os.path.join(R, 'numbers.html'), 'w').write(out)
 print(f"built: l_months={len(l_months)} astor={len(astor_months)} daily={len(daily)} cams={len(cams)} bus_month={bus_month} fare={'yes' if fare else 'no'} size={len(out)//1024}KB")
