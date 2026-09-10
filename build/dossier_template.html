@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Doors, One Park</title>
+<meta name="description" content="178 First Ave and 115 Avenue A, East Village. 1,439 buildings at recorded roof heights, the walk between two doors, and the L that feeds them both.">
+<meta name="theme-color" content="#F1F3EC">
+<link rel="canonical" href="https://feldtdesign-ship-it.github.io/east-village-178-115/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="178 First Ave · 115 Avenue A · Two Doors, One Park">
+<meta property="og:description" content="Two East Village doors 307 m apart. The block at recorded heights, the walk between them, and the L that feeds both. From public data.">
+<meta property="og:url" content="https://feldtdesign-ship-it.github.io/east-village-178-115/">
+<meta property="og:image" content="https://feldtdesign-ship-it.github.io/east-village-178-115/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="178 First Ave · 115 Avenue A · Two Doors, One Park">
+<meta name="twitter:image" content="https://feldtdesign-ship-it.github.io/east-village-178-115/og.jpg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Public+Sans:wght@400;600&family=Courier+Prime:wght@400;700&display=swap">
+<style>
+:root{--paper:#F1F3EC;--card:#FFFFFF;--rule:#D7D9D2;--ink:#141614;--ink-2:#3A3D3A;--muted:#6E7370;--red:#B5442E;--green:#5F7F4B;--l:#8D9094;--opsz:96;--w:800;
+ --disp:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;--body:"Public Sans",system-ui,-apple-system,sans-serif;--mono:"Courier Prime",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;overflow-x:hidden}
+#stage{position:fixed;inset:0;z-index:0}
+#stage canvas{display:block}
+#poster{position:fixed;inset:0;z-index:0;display:none}
+#poster img{width:100%;height:100%;object-fit:cover}
+body.fallback #poster{display:block} body.fallback #stage{display:none}
+#scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(241,243,236,.94) 0%,rgba(241,243,236,.72) 34%,rgba(241,243,236,.08) 60%,rgba(241,243,236,0) 100%);transition:background .5s}
+#scrim.flip{background:linear-gradient(270deg,rgba(241,243,236,.94) 0%,rgba(241,243,236,.72) 34%,rgba(241,243,236,.08) 60%,rgba(241,243,236,0) 100%)}
+#scrim.top{background:linear-gradient(180deg,rgba(241,243,236,.92) 0%,rgba(241,243,236,.55) 40%,rgba(241,243,236,0) 75%)}
+#bar{position:fixed;left:0;top:0;height:3px;background:var(--red);z-index:6;width:0}
+#load{position:fixed;inset:0;z-index:9;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);transition:opacity .6s}
+#load.done{opacity:0;pointer-events:none}
+#load .track{width:200px;height:2px;background:var(--rule)} #load .fill{height:100%;width:0;background:var(--red);transition:width .2s}
+#mast{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;justify-content:space-between;align-items:baseline;padding:16px 24px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);pointer-events:none}
+#mast b{color:var(--ink);font-weight:700} #mast a{pointer-events:auto;color:var(--red);text-decoration:none}
+#rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:12px}
+#rail a{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;justify-content:flex-end}
+#rail a .dot{width:9px;height:9px;border:1.5px solid var(--muted);border-radius:0}
+#rail a.on{color:var(--red)} #rail a.on .dot{background:var(--red);border-color:var(--red)}
+#rail a .lbl{opacity:0;transition:opacity .2s} #rail a:hover .lbl,#rail a.on .lbl{opacity:1}
+#cap{position:fixed;left:24px;bottom:18px;z-index:5;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);max-width:60vw}
+#meter{position:fixed;right:24px;bottom:18px;z-index:5;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);opacity:0;transition:opacity .4s}
+#meter b{font-family:var(--disp);font-size:34px;font-weight:800;letter-spacing:0;font-variant-numeric:tabular-nums;color:var(--red)}
+#meter.on{opacity:1}
+#num{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;pointer-events:none;font-family:var(--disp);font-weight:900;font-size:min(58vh,44vw);line-height:.8;color:var(--red);opacity:0;transition:opacity .6s,color .6s;font-optical-sizing:none;font-variation-settings:"opsz" var(--opsz),"wght" 900;letter-spacing:-.04em;mix-blend-mode:multiply}
+#num.on{opacity:.18}
+main{position:relative;z-index:2}
+section{min-height:100vh;display:flex;align-items:center;padding:80px 24px}
+.wrap{width:min(560px,86vw)} .wrap.right{margin-left:auto}
+.card{background:rgba(255,255,255,.86);backdrop-filter:blur(6px);border-top:3px solid var(--red);padding:26px 28px}
+.card.g{border-top-color:var(--green)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(84px,13vw,190px);line-height:.84;letter-spacing:-.02em;margin:0 0 20px;font-optical-sizing:none;font-variation-settings:"opsz" var(--opsz),"wght" var(--w);color:var(--ink);text-wrap:balance}
+h1 em{font-style:italic;font-weight:500;color:var(--red)}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(44px,6vw,72px);line-height:.92;letter-spacing:-.015em;margin:0 0 14px;font-optical-sizing:none;font-variation-settings:"opsz" var(--opsz),"wght" 700;text-wrap:balance}
+h2 em{font-style:italic;font-weight:500}
+.red{color:var(--red)} .green{color:var(--green)}
+p{margin:0 0 12px;max-width:52ch} .lede{font-size:19px;color:var(--ink-2)}
+.rows{display:flex;flex-direction:column;gap:0;margin:16px 0 0;padding:0;border-top:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14.5px}
+.row dt{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0} .row dd{margin:0}
+.big{font-family:var(--disp);font-weight:800;font-size:clamp(64px,9vw,120px);line-height:.85;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0 8px;font-optical-sizing:none;font-variation-settings:"opsz" var(--opsz),"wght" 800}
+.big small{font-family:var(--body);font-weight:600;font-size:16px;letter-spacing:0;color:var(--ink);margin-left:8px}
+.cmp{display:grid;grid-template-columns:150px 1fr 1fr;gap:10px 12px;font-size:14px;border-top:1px solid var(--ink);padding-top:10px;margin-top:14px}
+.cmp .h{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cmp .k{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.cmp b{font-weight:600}
+.cta{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);text-decoration:none;border-bottom:1px solid var(--red);padding-bottom:2px}
+footer{position:relative;z-index:2;background:var(--paper);padding:40px 24px 60px;font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7}
+footer .wrap{width:min(720px,90vw)}
+@media (max-width:760px){#rail{display:none}#scrim,#scrim.flip{background:linear-gradient(0deg,rgba(241,243,236,.94) 12%,rgba(241,243,236,.5) 62%,rgba(241,243,236,.15))}#cap{max-width:70vw;font-size:10px}.wrap.right{margin-left:0}.cmp{grid-template-columns:1fr}#num{font-size:44vw}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}#num,#meter,#scrim{transition:none}}
+</style></head><body>
+<div id="load"><div>Loading the East Village</div><div class="track"><div class="fill" id="fill"></div></div></div>
+<div id="stage"></div>
+<div id="poster"><img src="frames/map_axon_web.jpg" alt="Axonometric of the blocks around both doors"></div>
+<div id="scrim"></div><div id="bar"></div>
+<div id="num">178</div>
+<div id="mast"><div><b>178 FIRST AVE · 115 AVENUE A</b> &nbsp;/&nbsp; East Village, Manhattan</div><div><a href="numbers.html">The numbers →</a></div></div>
+<nav id="rail">
+<a href="#s0"><span class="lbl">Two doors</span><span class="dot"></span></a>
+<a href="#s1"><span class="lbl">178</span><span class="dot"></span></a>
+<a href="#s2"><span class="lbl">The walk</span><span class="dot"></span></a>
+<a href="#s3"><span class="lbl">115</span><span class="dot"></span></a>
+<a href="#s4"><span class="lbl">The L</span><span class="dot"></span></a>
+<a href="#s5"><span class="lbl">Side by side</span><span class="dot"></span></a>
+<a href="#s6"><span class="lbl">Open items</span><span class="dot"></span></a></nav>
+<div id="cap"></div>
+<div id="meter"><b id="m-v">0</b> m of 307</div>
+<main>
+<section id="s0" data-cap="1,439 buildings / NYC footprints at recorded roof heights / 1,315 street trees" data-num="">
+<div class="wrap"><div class="eyebrow">Platform's Edge / Location Study / Draft</div>
+<h1>Two<br>doors,<br><em>one park</em></h1>
+<p class="lede">178 First Avenue and 115 Avenue A, 307 metres apart, with Tompkins Square between them. Every building here is real, at its recorded height. The red one and the green one are the doors.</p>
+<p style="font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Scroll.</p></div></section>
+
+<section id="s1" data-cap="BBL 1004380008 / built 1920 / 3 storeys / 17.75 ft of frontage / M15 at the door" data-num="178" data-numc="red">
+<div class="wrap right"><div class="card"><div class="eyebrow">First door</div>
+<h2><span class="red">178</span> First <em>Avenue</em></h2>
+<p>An avenue door. First Avenue runs north, four lanes and a painted bus lane, and the sidewalk in front is 13 to 14 feet. The M15 local stops 58 m away. The L is 276 m up the avenue.</p>
+<dl class="rows">
+<div class="row"><dt>Lot</dt><dd>17.75 × 94 ft · built 1920 · 3 storeys, all commercial</dd></div>
+<div class="row"><dt>Retail</dt><dd>3,048 sq ft on record</dd></div>
+<div class="row"><dt>Bus at the door</dt><dd>M15 local, 58 m · about 3 riders an hour at 5 pm</dd></div>
+<div class="row"><dt>Sidewalk</dt><dd>13 to 14 ft, roadbed 70 ft</dd></div>
+<div class="row"><dt>Cameras</dt><dd>Two at 14th St, 270 m, facing north tonight</dd></div>
+</dl></div></div></section>
+
+<section id="s2" data-cap="The walk / 11th Street to Avenue A to St Marks / 4 minutes" data-num="" data-walk="1">
+<div class="wrap"><div class="card"><div class="eyebrow">Between them</div>
+<h2>Three hundred and seven <em>metres</em></h2>
+<p>Four minutes on foot. Down 11th, across to Avenue A, south along the park's edge. The camera is walking it now. The meter at the bottom right counts the distance as you scroll.</p>
+<p>This is the whole argument for doing the two doors together. One neighbourhood, one park, one L station, two frontages that see different crowds.</p></div></div></section>
+
+<section id="s3" data-cap="BBL 1004350035 / built 1900 / 4 storeys / 24.4 ft of frontage / faces Tompkins Square" data-num="115" data-numc="green">
+<div class="wrap right"><div class="card g"><div class="eyebrow">Second door</div>
+<h2><span class="green">115</span> Avenue <em>A</em></h2>
+<p>A park door. Tompkins Square Park is across the avenue, 10.5 acres of it. The M8 crosstown stops 44 m away and the M14A Select Bus at 11th. The L is 536 m. This door lives on the park and the walkers, not the train.</p>
+<dl class="rows">
+<div class="row"><dt>Lot</dt><dd>24.4 × 100 ft · built 1900 · 4 storeys, 4 apartments above</dd></div>
+<div class="row"><dt>Retail</dt><dd>1,100 sq ft on record</dd></div>
+<div class="row"><dt>Bus at the door</dt><dd>M8, 44 m · about 27 riders an hour at 5 pm across the four park stops</dd></div>
+<div class="row"><dt>Sidewalk</dt><dd>14 to 15 ft, roadbed 50 ft</dd></div>
+<div class="row"><dt>Cameras</dt><dd>None. Nearest is 548 m, on Houston</dd></div>
+</dl></div></div></section>
+
+<section id="s4" data-cap="1st Av station, L / complex 119 / 20,800 entries a weekday, summer 2026" data-num="L" data-numc="l">
+<div class="wrap"><div class="card"><div class="eyebrow">The one pump both doors share</div>
+<div class="big red" id="l-big">3,403<small>an hour, 5 pm</small></div>
+<h2>The <em>L</em> at 1st Avenue</h2>
+<p>About 20,800 people enter this station on a summer weekday, and about the same come out. At 5 pm that is 3,400 an hour through the stairs at 14th Street, 276 m from one door and 536 m from the other. Everything else that arrives by transit near these doors is small.</p>
+<a class="cta" href="numbers.html">Hour by hour, the week, the years since 2020 →</a></div></div></section>
+
+<section id="s5" data-cap="Plan / the city's surveyed roadbed and sidewalks / both doors" data-num="">
+<div class="wrap right"><div class="card"><div class="eyebrow">Side by side</div>
+<h2>Same block, <em>different doors</em></h2>
+<div class="cmp">
+<span class="h"></span><span class="h" style="color:var(--red)">178 First Ave</span><span class="h" style="color:var(--green)">115 Avenue A</span>
+<span class="k">Frontage</span><b>17.75 ft</b><b>24.4 ft</b>
+<span class="k">Retail on record</span><span>3,048 sq ft</span><span>1,100 sq ft</span>
+<span class="k">Sidewalk</span><span>13 to 14 ft</span><span>14 to 15 ft</span>
+<span class="k">Bus riders a month, nearest stops</span><span>2,660</span><span>14,980</span>
+<span class="k">L station</span><span>276 m</span><span>536 m</span>
+<span class="k">Crashes since 2023, 150 m</span><span>60 · 11 on foot</span><span>37 · 7 on foot</span>
+<span class="k">Public camera</span><span>Two, turnable</span><span>None</span>
+</div></div></div></section>
+
+<section id="s6" data-cap="Open items / what nobody has counted yet" data-num="">
+<div class="wrap"><div class="card"><div class="eyebrow">Open items</div>
+<h2>What is <em>still</em> not counted</h2>
+<p>Nobody counts the people passing either door. Three moves would fix that, in order of cost.</p>
+<dl class="rows">
+<div class="row"><dt>$0</dt><dd>Ask DOT to aim the 1st Avenue camera at 14th Street south. It would see 11th Street and 178.</dd></div>
+<div class="row"><dt>$0 to $200</dt><dd>A small counter in the window at 115. Nothing public reaches Avenue A.</dd></div>
+<div class="row"><dt>$99 to $299 a month</dt><dd>One paid month of Placer.ai for both addresses: years of monthly visits, dwell and origin. Prices are third-party listings.</dd></div>
+</dl>
+<a class="cta" href="live-wall.html">The six nearest live cameras →</a></div></div></section>
+</main>
+<footer><div class="wrap"><p>Model built from NYC Open Data: building footprints with recorded roof heights, planimetric roadbed, sidewalk and median polygons, street centerline names, and the 2015 street tree census. Both lots matched by BBL through the city geocoder. Transit figures are MTA hourly ridership and bus stop-level counts, summer 2026. Draft. Not an offer.</p></div></footer>
+
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.161.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.161.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+const MODEL='assets/east_village_pair.glb';
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const loadEl=document.getElementById('load'), fillEl=document.getElementById('fill');
+// glTF space: x east, y up, z south. 178 at (-11,0,-156), 115 at (10,0,148), L station at (175,0,-360).
+const D178=[-11,0,-156], D115=[10,0,148], LST=[175,0,-360];
+const WP=[
+ {p:[330,470,330],t:[0,8,0],s:250},                      // s0 wide over the pair
+ {p:[D178[0]+70,80,D178[2]+70],t:[D178[0],6,D178[2]],s:44}, // s1 178 close
+ {p:[70,110,70],t:[0,6,0],s:70},                          // s2 the walk, mid
+ {p:[D115[0]+90,90,D115[2]+70],t:[D115[0],6,D115[2]],s:52}, // s3 115 and the park
+ {p:[LST[0]+120,420,LST[2]+120],t:[LST[0],0,LST[2]],s:190}, // s4 the L, from above
+ {p:[10,760,90],t:[0,0,0],s:300},                        // s5 plan
+ {p:[420,560,420],t:[0,8,0],s:320}];                     // s6 wide, out
+let renderer,scene,cam,ready=false;
+function fail(m){console.warn('3D unavailable:',m);document.body.classList.add('fallback');loadEl.classList.add('done');}
+try{renderer=new THREE.WebGLRenderer({antialias:true});}catch(e){fail(e);}
+if(renderer){
+ renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight);
+ renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+ document.getElementById('stage').appendChild(renderer.domElement);
+ scene=new THREE.Scene(); scene.background=new THREE.Color(0xF1F3EC); scene.fog=new THREE.Fog(0xF1F3EC,900,2200);
+ cam=new THREE.OrthographicCamera(-1,1,1,-1,-3000,6000);
+ scene.add(new THREE.HemisphereLight(0xffffff,0xd9dcd2,1.05));
+ const key=new THREE.DirectionalLight(0xffffff,2.0); key.position.set(-260,420,200); key.castShadow=true; key.shadow.mapSize.set(2048,2048);
+ const c=key.shadow.camera; c.left=-500;c.right=500;c.top=500;c.bottom=-500;c.near=1;c.far=1400; scene.add(key);
+ const fl=new THREE.DirectionalLight(0xffffff,0.5); fl.position.set(320,200,-280); scene.add(fl);
+ const draco=new DRACOLoader(); draco.setDecoderPath('https://unpkg.com/three@0.161.0/examples/jsm/libs/draco/gltf/');
+ const loader=new GLTFLoader(); loader.setDRACOLoader(draco);
+ loader.load(MODEL,(g)=>{
+  g.scene.traverse(o=>{ if(!o.isMesh)return; const m=o.material; if(m){m.roughness=1;m.metalness=0;m.flatShading=true;}
+   const n=o.name.toUpperCase();
+   if(n.startsWith('EV_MASSING')){o.castShadow=true;o.receiveShadow=true;if(m)m.color=new THREE.Color(0x1C1E1C);}
+   else if(n.startsWith('SITE_178')){o.castShadow=true;if(m){m.color=new THREE.Color(0xB5442E);m.emissive=new THREE.Color(0xB5442E);m.emissiveIntensity=.45;}}
+   else if(n.startsWith('SITE_115')){o.castShadow=true;if(m){m.color=new THREE.Color(0x5F7F4B);m.emissive=new THREE.Color(0x5F7F4B);m.emissiveIntensity=.45;}}
+   else if(n.startsWith('TREES')){o.castShadow=true;}
+   else if(n.startsWith('GROUND')||n.startsWith('PLANE')){o.receiveShadow=true;if(m)m.color=new THREE.Color(0xE9EBE3);}
+   else {o.receiveShadow=true;} });
+  scene.add(g.scene); ready=true; window.__ready=true; loadEl.classList.add('done'); onScroll();
+ },(ev)=>{ if(ev.total) fillEl.style.width=(ev.loaded/ev.total*100).toFixed(0)+'%'; },(err)=>fail(err));
+ const state={p:new THREE.Vector3(),t:new THREE.Vector3(),s:250}, goal={p:new THREE.Vector3(),t:new THREE.Vector3(),s:250};
+ const secs=[...document.querySelectorAll('main section')], links=[...document.querySelectorAll('#rail a')];
+ const cap=document.getElementById('cap'), bar=document.getElementById('bar'), scrim=document.getElementById('scrim'), num=document.getElementById('num'), meter=document.getElementById('meter'), mv=document.getElementById('m-v');
+ let shown=-1; const mult=()=>innerWidth<760?1.5:1; const lerp=(a,b,t)=>a+(b-a)*t; const smooth=t=>t*t*(3-2*t);
+ function onScroll(){
+  const max=document.documentElement.scrollHeight-innerHeight; const t=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+  bar.style.width=(t*100).toFixed(2)+'%';
+  const seg=t*(WP.length-1), i=Math.min(WP.length-2,Math.floor(seg)), f=smooth(seg-i), a=WP[i], b=WP[i+1];
+  goal.p.set(lerp(a.p[0],b.p[0],f),lerp(a.p[1],b.p[1],f),lerp(a.p[2],b.p[2],f));
+  goal.t.set(lerp(a.t[0],b.t[0],f),lerp(a.t[1],b.t[1],f),lerp(a.t[2],b.t[2],f));
+  goal.s=lerp(a.s,b.s,f)*mult();
+  // type follows the camera: close = sturdy small optical size, wide = hairline large
+  const close=1-Math.min(1,Math.max(0,(goal.s/mult()-44)/(320-44)));
+  document.documentElement.style.setProperty('--opsz',(96-90*close).toFixed(1));
+  document.documentElement.style.setProperty('--w',(800+100*close).toFixed(0));
+  if(reduced){state.p.copy(goal.p);state.t.copy(goal.t);state.s=goal.s;}
+  const mid=innerHeight*0.45; let n=0,bd=1e9;
+  secs.forEach((s,j)=>{const r=s.getBoundingClientRect(); const d=Math.abs(r.top+r.height/2-mid); if(d<bd){bd=d;n=j;}});
+  // walk meter: distance covered between waypoint 1 (178) and 3 (115)
+  const w=Math.min(1,Math.max(0,(seg-1)/2)); mv.textContent=Math.round(307*w); meter.classList.toggle('on',seg>0.85&&seg<3.15);
+  if(n!==shown){shown=n; links.forEach((l,j)=>l.classList.toggle('on',j===n)); const s=secs[n]; cap.textContent=s.dataset.cap||'';
+   scrim.className=(n===4||n===5)?'top':(s.querySelector('.wrap.right')?'flip':'');
+   const nv=s.dataset.num||''; num.textContent=nv||num.textContent; num.classList.toggle('on',!!nv);
+   num.style.color=s.dataset.numc==='green'?'var(--green)':s.dataset.numc==='l'?'var(--l)':'var(--red)'; }
+ }
+ function frame(){ requestAnimationFrame(frame); if(!ready)return;
+  if(!reduced){state.p.lerp(goal.p,0.07);state.t.lerp(goal.t,0.07);state.s+=(goal.s-state.s)*0.07;}
+  const a=innerWidth/innerHeight; cam.left=-state.s*a; cam.right=state.s*a; cam.top=state.s; cam.bottom=-state.s;
+  cam.position.copy(state.p); cam.up.set(0,1,0); cam.lookAt(state.t); cam.updateProjectionMatrix(); renderer.render(scene,cam); }
+ addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);onScroll();});
+ onScroll(); state.p.copy(goal.p); state.t.copy(goal.t); state.s=goal.s; frame();
+ setTimeout(()=>{if(!ready)fail('timeout');},20000);
+}
+</script></body></html>
