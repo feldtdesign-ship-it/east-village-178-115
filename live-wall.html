@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Two doors · live cameras</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:title" content="178 First Ave · 115 Avenue A · Live Camera Wall"><meta property="og:description" content="The six nearest NYC DOT cameras. Two look down First Avenue from 14th Street."><meta property="og:image" content="https://feldtdesign-ship-it.github.io/east-village-178-115/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<style>
+body{margin:0;background:#F1F3EC;color:#141614;font-family:"Courier Prime",ui-monospace,Menlo,monospace;font-size:12px}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #141614;letter-spacing:.1em;text-transform:uppercase}
+header b{color:#B5442E;font-weight:400}
+main{display:grid;grid-template-columns:repeat(auto-fill,minmax(352px,1fr));gap:10px;padding:10px}
+figure{margin:0;background:#fff;border:1px solid #D7D9D2} img{width:100%;aspect-ratio:352/240;object-fit:cover;display:block;background:#000}
+figcaption{padding:8px 10px;color:#3A3D3A} figcaption b{color:#141614;font-weight:700} a{color:#B5442E}
+button{font:inherit;background:transparent;color:#3A3D3A;border:1px solid #D7D9D2;padding:5px 10px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase}
+</style></head><body>
+<header><span>178 First Ave · 115 Avenue A · nearest live DOT cameras</span><span><b id="t">–</b> &nbsp; <button id="p">Pause</button></span></header>
+<main><figure data-id="23994d9e-7e59-4808-8d47-405f779d19cf"><img alt="1 Ave @ 14 St"><figcaption><b>1 Ave @ 14 St</b> · 269 m · <a href="https://webcams.nyctmc.org/" target="_blank" rel="noopener">DOT</a></figcaption></figure><figure data-id="db5f8b82-99b1-45f3-a520-7d1f91d0a49a"><img alt="1 Ave @ E 14 St"><figcaption><b>1 Ave @ E 14 St</b> · 274 m · <a href="https://webcams.nyctmc.org/" target="_blank" rel="noopener">DOT</a></figcaption></figure><figure data-id="02d7db8e-481d-477e-9cdb-a2b6c6ec1ca3"><img alt="2 Ave @ E 14 St"><figcaption><b>2 Ave @ E 14 St</b> · 374 m · <a href="https://webcams.nyctmc.org/" target="_blank" rel="noopener">DOT</a></figcaption></figure><figure data-id="b5cf34ce-697e-42a1-b22f-8eb2c1f3e79e"><img alt="1 Ave @ E Houston St"><figcaption><b>1 Ave @ E Houston St</b> · 561 m · <a href="https://webcams.nyctmc.org/" target="_blank" rel="noopener">DOT</a></figcaption></figure><figure data-id="98c2de4e-fa0c-41d0-b1ea-6d1df833d792"><img alt="Allen St (1 Ave) @ Houston St"><figcaption><b>Allen St (1 Ave) @ Houston St</b> · 574 m · <a href="https://webcams.nyctmc.org/" target="_blank" rel="noopener">DOT</a></figcaption></figure><figure data-id="9dbb3101-9918-4b61-946f-a34d7c7c662b"><img alt="E Houston St @ Ave B"><figcaption><b>E Houston St @ Ave B</b> · 548 m · <a href="https://webcams.nyctmc.org/" target="_blank" rel="noopener">DOT</a></figcaption></figure></main>
+<script>
+const figs=[...document.querySelectorAll('figure')]; let on=true;
+function refresh(){ const ts=Date.now(); figs.forEach(f=>{ f.querySelector('img').src='https://webcams.nyctmc.org/api/cameras/'+f.dataset.id+'/image?t='+ts; }); document.getElementById('t').textContent='refreshed '+new Date().toLocaleTimeString('en-US',{timeZone:'America/New_York'})+' NYC'; }
+refresh(); setInterval(()=>{ if(on) refresh(); }, 20000);
+document.getElementById('p').onclick=e=>{ on=!on; e.target.textContent=on?'Pause':'Resume'; };
+</script></body></html>
